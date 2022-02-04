@@ -1,19 +1,19 @@
-import axios from 'axios'
+import axios from './http-common'
 import {AuthModel} from '../models/AuthModel'
 import {UserModel} from '../models/UserModel'
 
-const API_URL = process.env.REACT_APP_API_URL
+//const API_URL = process.env.REACT_APP_API_URL
 
-export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`
-export const LOGIN_URL = `${API_URL}/login`
-export const REGISTER_URL = `${API_URL}/register`
-export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
+export const GET_USER_BY_ACCESSTOKEN_URL = `verify_token`
+export const LOGIN_URL = `login`
+export const REGISTER_URL = `register`
+export const REQUEST_PASSWORD_URL = `forgot_password`
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
   return axios.get(LOGIN_URL, {
     params: {
-      email: email,
+      username: email,
       password: password,
     },
   })

@@ -8,6 +8,7 @@ export function Logout() {
   useEffect(() => {
     dispatch(auth.actions.logout())
     document.location.reload()
+    window.localStorage.removeItem('session');
   }, [dispatch])
 
   return (

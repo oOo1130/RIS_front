@@ -89,8 +89,13 @@ const DashboardPage: FC = () => (
 
 const DashboardWrapper: FC = () => {
   const intl = useIntl()
+  function logout() {
+    window.localStorage.removeItem('session');
+    window.location.reload();
+  }
   return (
     <>
+      <button onClick={logout}>Logout</button>
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
       <DashboardPage />
     </>
