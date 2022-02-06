@@ -12,12 +12,21 @@ import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import {PrivateRoutes} from './PrivateRoutes'
 import {Logout, AuthPage} from '../modules/auth'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
-import {RootState} from '../../setup'
+import {rootReducer, RootState} from '../../setup'
 import {MasterInit} from '../../_metronic/layout/MasterInit'
+// import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
+// import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
+// import ProfilePage from '../modules/profile/ProfilePage'
+// import WizardsPage from '../modules/wizards/WizardsPage'
+// import WidgetsPage from '../modules/widgets/WidgetsPage'
+// import AccountPage from '../modules/accounts/AccountPage'
+// import ChatPage from '../modules/apps/chat/ChatPage'
+// import { MenuTestPage } from '../pages/MenuTestPage'
+// import { Login } from '../modules/auth/components/Login'
 
 const Routes: FC = () => {
   const isAuthorized = useSelector<RootState>(({auth}) => auth.user, shallowEqual)
-
+  console.log("reduce", isAuthorized)
   return (
     <>
       <Switch>
