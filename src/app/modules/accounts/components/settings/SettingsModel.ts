@@ -16,6 +16,24 @@ export interface IProfileDetails {
   allowMarketing: boolean
 }
 
+export interface IUserListDetails {
+  fName: string
+  uName: string
+  password: string
+  confirmPassword: string
+  contactPhone: string
+  consultant: string
+  userRole: string
+  hospital: string
+  assignRad: boolean
+  reportDownload: boolean
+  reportEdit: boolean
+  mainViewer: boolean
+  cloudLink: string
+  cloudName: string
+  cloudPassword: string
+}
+
 export interface IUpdateEmail {
   newEmail: string
   confirmPassword: string
@@ -86,6 +104,24 @@ export const profileDetailsInitValues: IProfileDetails = {
     phone: false,
   },
   allowMarketing: false,
+}
+
+export const userListDetailsInitValues: IUserListDetails = {
+  fName: 'Max',
+  uName: 'Smith',
+  password: '',
+  confirmPassword: '',
+  contactPhone: '044 3276 454 935',
+  consultant: '',
+  userRole: '',
+  hospital: '',
+  assignRad: false,
+  reportDownload: false,
+  reportEdit: false,
+  mainViewer: false,
+  cloudLink: '',
+  cloudName: '',
+  cloudPassword: ''
 }
 
 export const updateEmail: IUpdateEmail = {
