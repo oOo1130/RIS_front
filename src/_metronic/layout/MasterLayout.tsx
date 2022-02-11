@@ -40,10 +40,10 @@ const MasterLayout: React.FC = ({children}) => {
           <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
             {/* <Toolbar /> */}
             <div className='post d-flex flex-column-fluid' id='kt_post'>
-              {/* <Content>{children}</Content> */}
+              <Content>{children}</Content>
             </div>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </div>
 

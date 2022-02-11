@@ -1,4 +1,5 @@
 import React, {Suspense, lazy} from 'react'
+import { Table } from 'react-bootstrap-v5'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import {FallbackView} from '../../_metronic/partials'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
@@ -11,6 +12,7 @@ export function PrivateRoutes() {
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
+  // const Table = lazy(() => import('../modules/setting/Table'))
 
   return (
     <Suspense fallback={<FallbackView />}>
@@ -20,6 +22,7 @@ export function PrivateRoutes() {
         <Route path='/crafted/pages/profile' component={ProfilePage} />
         <Route path='/crafted/pages/wizards' component={WizardsPage} />
         <Route path='/crafted/widgets' component={WidgetsPage} />
+        <Route path='/setting/user' component={WidgetsPage} />
         <Route path='/crafted/account' component={AccountPage} />
         <Route path='/apps/chat' component={ChatPage} />
         <Route path='/menu-test' component={MenuTestPage} />
