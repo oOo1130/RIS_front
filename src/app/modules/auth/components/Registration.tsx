@@ -58,7 +58,7 @@ export function Registration() {
         register(values.email, values.firstname, values.lastname, values.password, values.changepassword)
           .then(({data: {access_token}}) => {
             setLoading(false)
-            dispatch(auth.actions.login(access_token))
+            // dispatch(auth.actions.login(access_token))
           })
           .catch(() => {
             setLoading(false)

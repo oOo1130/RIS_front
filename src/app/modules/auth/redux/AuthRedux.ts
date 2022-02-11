@@ -3,7 +3,8 @@ import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {put, takeLatest} from 'redux-saga/effects'
 import {UserModel} from '../models/UserModel'
-import {getUserByToken} from './AuthCRUD'
+import {getMenuItems, getUserByToken} from './AuthCRUD'
+import {MenuItems} from '../models/MenuItems'
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T
@@ -16,16 +17,22 @@ export const actionTypes = {
   UserRequested: '[Request User] Action',
   UserLoaded: '[Load User] Auth API',
   SetUser: '[Set User] Action',
+  // Permission: '[permission] Action',
+  MenuItems: '[menuItems] Action'
 }
 
 const initialAuthState: IAuthState = {
   user: undefined,
   accessToken: undefined,
+  // permission: undefined,
+  items: undefined
 }
 
 export interface IAuthState {
   user?: UserModel
   accessToken?: string
+  // permission?: string
+  items?: MenuItems[]
 }
 
 export const reducer = persistReducer(
@@ -34,7 +41,7 @@ export const reducer = persistReducer(
     switch (action.type) {
       case actionTypes.Login: {
         const accessToken = action.payload?.accessToken
-        return {accessToken, user: undefined}
+        return {accessToken, user: undefined, items: undefined}
       }
 
       case actionTypes.Register: {
@@ -60,6 +67,16 @@ export const reducer = persistReducer(
         return {...state, user}
       }
 
+      // case actionTypes.Permission: {
+      //   const permission = action.payload?.permission
+      //   return {...state, permission}
+      // }
+
+      case actionTypes.MenuItems: {
+        const items = action.payload?.items
+        return {...state, items}
+      }
+
       default:
         return state
     }
@@ -78,6 +95,8 @@ export const actions = {
   }),
   fulfillUser: (user: UserModel) => ({type: actionTypes.UserLoaded, payload: {user}}),
   setUser: (user: UserModel) => ({type: actionTypes.SetUser, payload: {user}}),
+  // permission: (data : string) => ({type: actionTypes.Permission, payload: {data}}),
+  menuItems: (items: MenuItems[]) => ({type: actionTypes.MenuItems, payload: {items}})
 }
 
 export function* saga() {
@@ -92,5 +111,10 @@ export function* saga() {
   yield takeLatest(actionTypes.UserRequested, function* userRequested() {
     const {data: user} = yield getUserByToken()
     yield put(actions.fulfillUser(user))
+  })
+
+  yield takeLatest(actionTypes.MenuItems, function* MenuItemsSaga() {
+    const {data: menuItems} = yield getMenuItems()
+    yield put(actions.menuItems(menuItems))
   })
 }

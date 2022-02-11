@@ -15,9 +15,9 @@ const App: React.FC<Props> = ({basename}) => {
       <BrowserRouter basename={basename}>
         <I18nProvider>
           <LayoutProvider>
-            {/* <AuthInit> */}
+            <AuthInit>
               <Routes />
-            {/* </AuthInit> */}
+            </AuthInit>
           </LayoutProvider>
         </I18nProvider>
       </BrowserRouter>

@@ -8,9 +8,11 @@ import { bindActionCreators } from 'redux';
 import {Link, Redirect} from 'react-router-dom'
 import {useFormik} from 'formik'
 import * as auth from '../redux/AuthRedux'
-import {login} from '../redux/AuthCRUD'
+import {getMenuItems, login} from '../redux/AuthCRUD'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import './Login.css';
+import { actions } from '..'
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -46,11 +48,9 @@ export const Login = (props: any) => {
       setTimeout(() => {
         login(values.email, values.password,)
           .then(res => {
-            console.log(Response, "item");
-
             setLoading(false)
             if(res.data)
-              dispatch(auth.actions.login('access_token'))
+              dispatch(auth.actions.login(res.data))
             else
               window.location.reload();
           })
@@ -59,18 +59,37 @@ export const Login = (props: any) => {
             setSubmitting(false)
             setStatus('The login detail is incorrect')
           })
+
+        getMenuItems()
+          .then(res => {
+            setLoading(false)
+            if(res.data){
+              console.log(res.data, typeof(res.data), "____tmp____")
+              dispatch(auth.actions.menuItems(res.data))
+            }
+            else
+              window.location.reload();
+          })
+          .catch(() => {
+            setSubmitting(false)
+            setLoading(false)
+            setStatus('The menuItems is incorrect')
+          })
+        
       }, 1000)
+
+      
     },
   })
 
   return (
     
     <div className='d-flex justify-content-center '>
-      <div>
+      <div className='image'>
         <img className='img_login_left' src={toAbsoluteUrl('/media/svg/login.jpg')}/>
       </div>
-      <div style={{width:"3%"}}></div>
-      <div>
+      <div id='gap'></div>
+      <div className='px-5'>
         <form
           className='form w-70 '
           onSubmit={formik.handleSubmit}
@@ -159,9 +178,6 @@ export const Login = (props: any) => {
               </div>
             )}
           </div>
-          {/* end::Form group */}
-
-          {/* begin::Action */}
           <div className='text-center'>
             <button
               type='submit'
@@ -177,14 +193,6 @@ export const Login = (props: any) => {
                 </span>
               )}
             </button>
-            {/* <input
-            type='button'
-            id='cancel_login'
-            className='btn btn-lg btn-primary w-100 mb-5'
-            >
-              Cancel
-            </input> */}
-            {/* begin::Link */}
             <div className='text-center'>
               <Link
                     to='/auth/forgot-password'
@@ -204,66 +212,24 @@ export const Login = (props: any) => {
                 Email: emedicalbd2014@gmail.com
               </p>
             </div>
-            
-            {/* end::Link */}
-
-            {/* begin::Separator */}
-            {/* <div className='text-center text-muted text-uppercase fw-bolder mb-5'>or</div> */}
-            {/* end::Separator */}
-
-            {/* begin::Google link */}
-            {/* <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100 mb-5'>
-              <img
-                alt='Logo'
-                src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-                className='h-20px me-3'
-              />
-              Continue with Google
-            </a> */}
-            {/* end::Google link */}
-
-            {/* begin::Google link */}
-            {/* <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100 mb-5'>
-              <img
-                alt='Logo'
-                src={toAbsoluteUrl('/media/svg/brand-logos/facebook-4.svg')}
-                className='h-20px me-3'
-              />
-              Continue with Facebook
-            </a> */}
-            {/* end::Google link */}
-
-            {/* begin::Google link */}
-            {/* <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100'>
-              <img
-                alt='Logo'
-                src={toAbsoluteUrl('/media/svg/brand-logos/apple-black.svg')}
-                className='h-20px me-3'
-              />
-              Continue with Apple
-            </a> */}
-            {/* end::Google link */}
           </div>
-          {/* end::Action */}
         </form>
       </div>
-      
-      
     </div>
-    
   )
 }
 
-//the output is formed such as termofter;
 
 const mapStateToProps = (props : any) => {
   return {
-      item: props.auth
+    role: props.permission,
+    item: props.menuItem
+      
   }
 };
 
 const mapDistachToProps = (props : any) => (dispatch : any) => {
-  return bindActionCreators({ loginfun: takeLatest }, dispatch);
+  return bindActionCreators({item : actions.menuItems }, dispatch);
 };
 
 connect( mapStateToProps, mapDistachToProps )(Login)

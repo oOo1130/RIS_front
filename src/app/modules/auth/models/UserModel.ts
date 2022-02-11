@@ -8,6 +8,7 @@ export interface UserModel {
   id: number
   username: string
   password: string | undefined
+  permission: string
   email: string
   first_name: string
   last_name: string

@@ -1,6 +1,7 @@
 import axios from './http-common'
 import {AuthModel} from '../models/AuthModel'
 import {UserModel} from '../models/UserModel'
+import { MenuItems } from '../models/MenuItems'
 
 //const API_URL = process.env.REACT_APP_API_URL
 
@@ -43,4 +44,8 @@ export function getUserByToken() {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
   return axios.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL)
+}
+
+export async function getMenuItems() {
+  return axios.get("GetMenuItems")
 }

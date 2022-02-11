@@ -29,7 +29,7 @@ export function AuthPage() {
         </a>
         {/* end::Logo */}
         {/* begin::Wrapper */}
-        <div className='bg-white rounded w-100 shadow-sm p-10 p-lg-15 mx-auto'>
+        <div className='bg-white rounded w-100 shadow-sm p-5 p-lg-10 mx-auto'>
           <Switch>
             <Route path='/auth/login' component={Login} />
             <Route path='/auth/registration' component={Registration} />
