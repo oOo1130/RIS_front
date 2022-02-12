@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, connect } from 'react-redux'
 import { takeLatest } from 'redux-saga/effects'
 import * as Yup from 'yup'
@@ -39,7 +39,18 @@ const initialValues = {
 
 export const Login = (props: any) => {
   const [loading, setLoading] = useState(false)
+  
   const dispatch = useDispatch()
+  //   useEffect(() => {
+  //   const toAwait = async () => {
+  //     await getMenuItems()
+  //     .then(res => res.data)
+  //     .then(tasks => {
+  //       dispatch(auth.actions.menuItems(tasks))})  
+  //     }
+  //   toAwait()
+  //   }, [])
+
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
@@ -60,21 +71,21 @@ export const Login = (props: any) => {
             setStatus('The login detail is incorrect')
           })
 
-        getMenuItems()
-          .then(res => {
-            setLoading(false)
-            if(res.data){
-              console.log(res.data, typeof(res.data), "____tmp____")
-              dispatch(auth.actions.menuItems(res.data))
-            }
-            else
-              window.location.reload();
-          })
-          .catch(() => {
-            setSubmitting(false)
-            setLoading(false)
-            setStatus('The menuItems is incorrect')
-          })
+        // getMenuItems()
+        //   .then(res => {
+        //     setLoading(false)
+        //     if(res.data){
+        //       console.log(res.data, typeof(res.data), "____tmp____")
+        //       dispatch(auth.actions.menuItems(res.data))
+        //     }
+        //     else
+        //       window.location.reload();
+        //   })
+        //   .catch(() => {
+        //     setSubmitting(false)
+        //     setLoading(false)
+        //     setStatus('The menuItems is incorrect')
+        //   })
         
       }, 1000)
 

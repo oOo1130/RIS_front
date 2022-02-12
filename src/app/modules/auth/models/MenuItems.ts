@@ -2,6 +2,6 @@ import react from 'react'
 
 export interface MenuItems {
     id: number
-    menuItem: string
+    menuTitle: string
     menuTo: string
 }

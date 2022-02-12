@@ -14,7 +14,9 @@ const userListDetailsSchema = Yup.object().shape({
     fName: Yup.string().required('Full name is required'),
     uName: Yup.string().required('User name is required'),
   })
-  
+
+// const userTableData = 
+
 const ProfileDetails: React.FC = () => {
 const [data, setData] = useState<IUserListDetails>(initialValues)
 const updateData = (fieldsToUpdate: Partial<IUserListDetails>): void => {
@@ -244,9 +246,9 @@ return (
                 <label className='col-lg-9 col-form-label fw-bold fs-6 text-center'>Assign to Radiologist</label>
 
                 <div className='col-lg-3 d-flex align-items-center'>
-                    <div className='form-check form-check-solid form-switch fv-row'>
+                    <div className='form-check form-check-custom form-check-solid form-check-sm fv-row'>
                     <input
-                    className='form-check-input w-35px h-20px'
+                    className='form-check-input'
                     type='checkbox'
                     id='assignRad'
                     defaultChecked={data.assignRad}
@@ -261,9 +263,9 @@ return (
                 <label className='col-lg-9 col-form-label fw-bold fs-6 text-center'>Report View/Download</label>
 
                 <div className='col-lg-3 d-flex align-items-center'>
-                    <div className='form-check form-check-solid form-switch fv-row'>
+                    <div className='form-check form-check-custom form-check-solid form-check-sm fv-row'>
                         <input
-                        className='form-check-input w-35px h-20px'
+                        className='form-check-input'
                         type='checkbox'
                         id='reportDownload'
                         defaultChecked={data.reportDownload}
@@ -281,9 +283,9 @@ return (
                 <label className='col-lg-9 col-form-label fw-bold fs-6 text-center'>Report Write/Edit</label>
 
                 <div className='col-lg-3 d-flex align-items-center'>
-                <div className='form-check form-check-solid form-switch fv-row'>
+                <div className='form-check form-check-custom form-check-solid form-check-sm fv-row'>
                     <input
-                    className='form-check-input w-35px h-20px'
+                    className='form-check-input'
                     type='checkbox'
                     id='reportEdit'
                     defaultChecked={data.reportEdit}
@@ -299,9 +301,9 @@ return (
                 <label className='col-lg-9 col-form-label fw-bold fs-6 text-center'>Access to Main Viewer</label>
 
                 <div className='col-lg-3 d-flex align-items-center'>
-                    <div className='form-check form-check-solid form-switch fv-row'>
+                    <div className='form-check form-check-custom form-check-solid form-check-sm fv-row'>
                         <input
-                        className='form-check-input w-35px h-20px'
+                        className='form-check-input'
                         type='checkbox'
                         id='mainViewer'
                         defaultChecked={data.mainViewer}

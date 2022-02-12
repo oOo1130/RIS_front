@@ -47,5 +47,5 @@ export function getUserByToken() {
 }
 
 export async function getMenuItems() {
-  return axios.get("GetMenuItems")
+  return await axios.get<MenuItems[]>("GetMenuItems")
 }

@@ -41,7 +41,7 @@ export const reducer = persistReducer(
     switch (action.type) {
       case actionTypes.Login: {
         const accessToken = action.payload?.accessToken
-        return {accessToken, user: undefined, items: undefined}
+        return {accessToken, user: undefined}
       }
 
       case actionTypes.Register: {
@@ -66,11 +66,6 @@ export const reducer = persistReducer(
         const user = action.payload?.user
         return {...state, user}
       }
-
-      // case actionTypes.Permission: {
-      //   const permission = action.payload?.permission
-      //   return {...state, permission}
-      // }
 
       case actionTypes.MenuItems: {
         const items = action.payload?.items
@@ -113,8 +108,8 @@ export function* saga() {
     yield put(actions.fulfillUser(user))
   })
 
-  yield takeLatest(actionTypes.MenuItems, function* MenuItemsSaga() {
-    const {data: menuItems} = yield getMenuItems()
-    yield put(actions.menuItems(menuItems))
-  })
+  // yield takeLatest(actionTypes.MenuItems, function* MenuItemsSaga() {
+  //   const {data: menuItems} = yield getMenuItems()
+  //   yield put(actions.menuItems(menuItems))
+  // })
 }
