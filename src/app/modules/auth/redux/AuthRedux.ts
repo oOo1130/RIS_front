@@ -17,21 +17,18 @@ export const actionTypes = {
   UserRequested: '[Request User] Action',
   UserLoaded: '[Load User] Auth API',
   SetUser: '[Set User] Action',
-  // Permission: '[permission] Action',
   MenuItems: '[menuItems] Action'
 }
 
 const initialAuthState: IAuthState = {
   user: undefined,
   accessToken: undefined,
-  // permission: undefined,
   items: undefined
 }
 
 export interface IAuthState {
   user?: UserModel
   accessToken?: string
-  // permission?: string
   items?: MenuItems[]
 }
 
@@ -107,9 +104,4 @@ export function* saga() {
     const {data: user} = yield getUserByToken()
     yield put(actions.fulfillUser(user))
   })
-
-  // yield takeLatest(actionTypes.MenuItems, function* MenuItemsSaga() {
-  //   const {data: menuItems} = yield getMenuItems()
-  //   yield put(actions.menuItems(menuItems))
-  // })
 }

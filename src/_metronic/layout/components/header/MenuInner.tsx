@@ -15,14 +15,8 @@ import store, {persistor} from '../../../../setup/redux/Store'
 export function MenuInner(props) {
 
   const intl = useIntl();
-  let initialState: MenuItems[] = [{
-    id: 1,
-    menuTitle: "",
-    menuTo: "",
-  }]
-
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     const toAwait = async () => {
       await getMenuItems()
@@ -34,15 +28,12 @@ export function MenuInner(props) {
     }, [])
 
   const permission = useSelector<RootState>(state => state.auth.accessToken, shallowEqual)
-  console.log(permission)
   const itemstate: MenuItems[] = useSelector<RootState>(state => state.auth.items, shallowEqual) as MenuItems[]
-  console.log(itemstate, typeof(itemstate), "itemstate")
-  console.log("111111111111111111")
   
   return(
     <>
       {itemstate == null? (
-        <p>No result</p>
+        <p> </p>
       ) : (
           itemstate.map(item => 
             <MenuItem key={item.id} title={item.menuTitle} to={"/"+item.menuTo} />
@@ -65,11 +56,6 @@ export function MenuInner(props) {
     </>
   )
 }
-// export default MenuInner
-
-// function dispatch(arg0: { type: string; payload: { user: import("../../../../app/modules/auth/models/UserModel").UserModel } }) {
-//   throw new Error('Function not implemented.')
-// }
 const mapStateToProps = (props) => {
   return {
     role1: props.permissions,
