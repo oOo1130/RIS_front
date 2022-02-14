@@ -3,8 +3,10 @@ import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {put, takeLatest} from 'redux-saga/effects'
 import {UserModel} from '../models/UserModel'
-import {getMenuItems, getUserByToken} from './AuthCRUD'
+import {getMenuItems, getReportConsultants, getRoles, getUserByToken} from './AuthCRUD'
 import {MenuItems} from '../models/MenuItems'
+//import { CreateUserModel } from '../models/CreateUserModel'
+import { IHospital, IReportConsultant, IRole, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T
@@ -17,19 +19,31 @@ export const actionTypes = {
   UserRequested: '[Request User] Action',
   UserLoaded: '[Load User] Auth API',
   SetUser: '[Set User] Action',
-  MenuItems: '[menuItems] Action'
+  MenuItems: '[menuItems] Action',
+  GetAllUsers: '[getAllUsers] Action',
+  getReportConsultants: '[getReportConsultant] Action',
+  getRoles: '[getRoles] Action',
+  getHospitals: '[getHospitals] Action'
 }
 
 const initialAuthState: IAuthState = {
   user: undefined,
   accessToken: undefined,
-  items: undefined
+  items: undefined,
+  users: undefined,
+  consultants: undefined,
+  roles: undefined,
+  hospitals: undefined
 }
 
 export interface IAuthState {
   user?: UserModel
   accessToken?: string
   items?: MenuItems[]
+  users?: IUserListDetails[]
+  consultants?: IReportConsultant[]
+  roles?: IRole[]
+  hospitals?: IHospital[]
 }
 
 export const reducer = persistReducer(
@@ -69,6 +83,26 @@ export const reducer = persistReducer(
         return {...state, items}
       }
 
+      case actionTypes.GetAllUsers: {
+        const users = action.payload?.users
+        return {...state, users}
+      }
+
+      case actionTypes.getReportConsultants: {
+        const consultants = action.payload?.consultants
+        return {...state, consultants}
+      }
+
+      case actionTypes.getRoles: {
+        const roles = action.payload?.roles
+        return {...state, roles}
+      }
+
+      case actionTypes.getHospitals: {
+        const hospitals = action.payload?.hospitals
+        return {...state, hospitals}
+      }
+
       default:
         return state
     }
@@ -87,8 +121,11 @@ export const actions = {
   }),
   fulfillUser: (user: UserModel) => ({type: actionTypes.UserLoaded, payload: {user}}),
   setUser: (user: UserModel) => ({type: actionTypes.SetUser, payload: {user}}),
-  // permission: (data : string) => ({type: actionTypes.Permission, payload: {data}}),
-  menuItems: (items: MenuItems[]) => ({type: actionTypes.MenuItems, payload: {items}})
+  menuItems: (items: MenuItems[]) => ({type: actionTypes.MenuItems, payload: {items}}),
+  getUsers: (users: IUserListDetails[]) => ({type: actionTypes.GetAllUsers, payload: {users}}),
+  reportConsultants: (consultants: IReportConsultant[]) => ({type: actionTypes.getReportConsultants, payload: {consultants}}),
+  getRoles: (roles: IRole[]) => ({type: actionTypes.getRoles, payload: {roles}}),
+  getHospitals: (hospitals: IHospital[]) => ({type: actionTypes.getHospitals, payload: {hospitals}})
 }
 
 export function* saga() {

@@ -6,11 +6,7 @@ import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../setup'
 import { getMenuItems } from '../../../../app/modules/auth/redux/AuthCRUD'
 import { MenuItems } from '../../../../app/modules/auth/models/MenuItems'
-import { MegaMenu } from './MegaMenu'
 import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
-import store, {persistor} from '../../../../setup/redux/Store'
-
-// import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
 
 export function MenuInner(props) {
 

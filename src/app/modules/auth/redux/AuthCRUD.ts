@@ -2,6 +2,8 @@ import axios from './http-common'
 import {AuthModel} from '../models/AuthModel'
 import {UserModel} from '../models/UserModel'
 import { MenuItems } from '../models/MenuItems'
+//import { CreateUserModel } from '../models/CreateUserModel'
+import { IHospital, IReportConsultant, IRole, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
 
 //const API_URL = process.env.REACT_APP_API_URL
 
@@ -48,4 +50,20 @@ export function getUserByToken() {
 
 export async function getMenuItems() {
   return await axios.get<MenuItems[]>("GetMenuItems")
+}
+
+export async function getAllUsers() {
+  return await axios.get<IUserListDetails[]>("GetUserDetails")
+}
+
+export async function getReportConsultants() {
+  return await axios.get<IReportConsultant[]>("GetAllRadiologists")
+}
+
+export async function getRoles() {
+  return await axios.get<IRole[]>("GetRoles")
+}
+
+export async function getHospitals() {
+  return await axios.get<IHospital[]>("GetHospitals")
 }

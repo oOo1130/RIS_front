@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { getMenuItems } from '../../../../app/modules/auth/redux/AuthCRUD'
 import MenuInner from './MenuInner'
-import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
+// import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
 
 
 const Header: FC = () => {

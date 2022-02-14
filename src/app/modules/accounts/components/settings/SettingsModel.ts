@@ -1,3 +1,5 @@
+import { number } from "yup/lib/locale";
+
 export interface IProfileDetails {
   avatar: string
   fName: string
@@ -17,21 +19,27 @@ export interface IProfileDetails {
 }
 
 export interface IUserListDetails {
-  fName: string
-  uName: string
+  userId: number
+  loginName: string
+  fullName: string
   password: string
   confirmPassword: string
-  contactPhone: string
+  mobileNo?: number
   consultant: string
-  userRole: string
+  roleId: number
+  roleName: string
   hospital: string
-  assignRad: boolean
-  reportDownload: boolean
-  reportEdit: boolean
-  mainViewer: boolean
-  cloudLink: string
-  cloudName: string
-  cloudPassword: string
+  rCID: number
+  tenantId: string
+  status: string
+  comments: string
+  cloudAccessLink?: string
+  cloudUserName?: string
+  cloudPassword?: string
+  isAssignToRadAllow: boolean
+  isMainViewerAlloted: boolean
+  isReportWriteAllow: boolean
+  isReportViewAllow: boolean
 }
 
 export interface IUpdateEmail {
@@ -88,6 +96,43 @@ export interface IDeactivateAccount {
   confirm: boolean
 }
 
+export interface IReportConsultant {
+  rcid: number
+  name: string
+  radNextCloudID: string
+
+  // IdentityLine1: string
+  // Fsize2: number
+  // IdentityLine2: string
+  // Fsize3: number
+  // IdentityLine3: string
+  // Fsize4: number
+  // IdentityLine4: string
+  // Fsize5: number
+  // IdentityLine5: string
+  // Fsize6: number
+  // IdentityLine6: string
+  // Fsize7: number
+  // ESignature: Uint8Array
+  // IsESignatureAllow: boolean
+  // Status: string
+  // SignatureBase64HtmlEmbeded: string
+  // IsViewerWithDefaultTemplate: boolean
+  // DicomImagePath: string
+  // GroupName: string
+}
+
+export interface IRole {
+  roleID: number
+  name: string
+  description: string
+}
+export interface IHospital {
+  pid: number
+  modality: string
+  procName: string
+}
+
 export const profileDetailsInitValues: IProfileDetails = {
   avatar: '/media/avatars/150-2.jpg',
   fName: 'Max',
@@ -107,21 +152,27 @@ export const profileDetailsInitValues: IProfileDetails = {
 }
 
 export const userListDetailsInitValues: IUserListDetails = {
-  fName: 'Max',
-  uName: 'Smith',
+  fullName: '',
+  loginName: '',
   password: '',
   confirmPassword: '',
-  contactPhone: '044 3276 454 935',
+  mobileNo: null,
   consultant: '',
-  userRole: '',
+  roleName: '',
   hospital: '',
-  assignRad: false,
-  reportDownload: false,
-  reportEdit: false,
-  mainViewer: false,
-  cloudLink: '',
-  cloudName: '',
-  cloudPassword: ''
+  isAssignToRadAllow: false,
+  isReportViewAllow: false,
+  isReportWriteAllow: false,
+  isMainViewerAlloted: false,
+  cloudAccessLink: '',
+  cloudUserName: '',
+  cloudPassword: '',
+  roleId: 0,
+  userId: 0,
+  rCID: 0,
+  tenantId: "",
+  status:"",
+  comments: ""
 }
 
 export const updateEmail: IUpdateEmail = {
