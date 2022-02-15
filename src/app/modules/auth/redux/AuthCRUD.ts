@@ -3,7 +3,7 @@ import {AuthModel} from '../models/AuthModel'
 import {UserModel} from '../models/UserModel'
 import { MenuItems } from '../models/MenuItems'
 //import { CreateUserModel } from '../models/CreateUserModel'
-import { IHospital, IReportConsultant, IRole, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
+import { IHospital, IReportConsultant, IRole, ITenant, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
 
 //const API_URL = process.env.REACT_APP_API_URL
 
@@ -66,4 +66,8 @@ export async function getRoles() {
 
 export async function getHospitals() {
   return await axios.get<IHospital[]>("GetHospitals")
+}
+
+export async function getTenants() {
+  return await axios.get<ITenant[]>("GetHospitals")
 }

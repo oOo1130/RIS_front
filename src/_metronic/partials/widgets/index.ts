@@ -61,6 +61,9 @@ export * from './tables/TablesWidget11'
 export * from './tables/TablesWidget12'
 export * from './tables/TablesWidget13'
 export * from './tables/userTableWidget'
+export * from './tables/roleTableWidget'
+export * from './tables/tenantTableWidget'
+export * from './tables/consultantTableWidget'
 
 // engage
 export * from './engage/EngageWidget1'

@@ -8,6 +8,9 @@ import {Tables} from './components/Tables'
 import {Mixed} from './components/Mixed'
 import {Statistics} from './components/Statistics'
 import { UserTables } from './components/userTables'
+import { RoleTables } from './components/roleTables'
+import { TenantTables } from './components/tenantTable'
+import { ConsultantTables } from './components/consultantTables'
 
 const widgetsBreadCrumbs: Array<PageLink> = [
   {
@@ -50,6 +53,18 @@ const WidgetsPage: React.FC = () => {
       <Route path='/setting/user'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>userTables</PageTitle>
         <UserTables />
+      </Route>
+      <Route path='/setting/role'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>roleTables</PageTitle>
+        <RoleTables />
+      </Route>
+      <Route path='/setting/tenant'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>tenantTables</PageTitle>
+        <TenantTables />
+      </Route>
+      <Route path='/setting/consultant'>
+        <PageTitle breadcrumbs={widgetsBreadCrumbs}>consultantTables</PageTitle>
+        <ConsultantTables />
       </Route>
       <Route path='/crafted/widgets/statistics'>
         <PageTitle breadcrumbs={widgetsBreadCrumbs}>Statiscics</PageTitle>

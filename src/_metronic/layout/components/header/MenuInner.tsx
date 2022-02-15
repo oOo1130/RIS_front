@@ -35,6 +35,7 @@ export function MenuInner(props) {
             <MenuItem key={item.id} title={item.menuTitle} to={"/"+item.menuTo} />
           )
       )}
+      {/*  */}
       {permission === "Admin" && 
         <MenuInnerWithSub
           title='Setting'
@@ -43,9 +44,9 @@ export function MenuInner(props) {
           menuTrigger='click'
         >
           <MenuItem to='/setting/user' title='Create User' hasBullet={true} />
-          <MenuItem to='/role' title='Create Role' hasBullet={true} />
-          <MenuItem to='/tenant' title='Add/Edit Tenant' hasBullet={true} />
-          <MenuItem to='/consultant' title='Add/Edit Consultant' hasBullet={true} />
+          <MenuItem to='/setting/role' title='Create Role' hasBullet={true} />
+          <MenuItem to='/setting/tenant' title='Add/Edit Tenant' hasBullet={true} />
+          <MenuItem to='/setting/consultant' title='Add/Edit Consultant' hasBullet={true} />
           <MenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         </MenuInnerWithSub> 
       }

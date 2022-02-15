@@ -23,6 +23,9 @@ export function PrivateRoutes() {
         <Route path='/crafted/pages/wizards' component={WizardsPage} />
         <Route path='/crafted/widgets' component={WidgetsPage} />
         <Route path='/setting/user' component={WidgetsPage} />
+        <Route path='/setting/role' component={WidgetsPage} />
+        <Route path='/setting/tenant' component={WidgetsPage} />
+        <Route path='/setting/consultant' component={WidgetsPage} />
         <Route path='/crafted/account' component={AccountPage} />
         <Route path='/apps/chat' component={ChatPage} />
         <Route path='/menu-test' component={MenuTestPage} />

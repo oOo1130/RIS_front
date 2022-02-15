@@ -1,4 +1,4 @@
-import { number } from "yup/lib/locale";
+import { number, string } from "yup/lib/locale";
 
 export interface IProfileDetails {
   avatar: string
@@ -123,6 +123,7 @@ export interface IReportConsultant {
 }
 
 export interface IRole {
+  isReportViewAllow: boolean;
   roleID: number
   name: string
   description: string
@@ -131,6 +132,20 @@ export interface IHospital {
   pid: number
   modality: string
   procName: string
+}
+
+export interface ITenant {
+  tenantId: number
+  name: string
+  shortName: string
+  address: string
+  mobileNo: string
+  phoneNo: string
+  fax: string
+  email: string
+  contactPerson: string
+  isActive?: boolean
+  hasDefaultRadiologist?: boolean
 }
 
 export const profileDetailsInitValues: IProfileDetails = {
@@ -227,4 +242,18 @@ export const notifications: INotifications = {
 
 export const deactivateAccount: IDeactivateAccount = {
   confirm: false,
+}
+
+export const tenantDetail : ITenant = {
+  tenantId: null,
+  name: "",
+  shortName: "",
+  address: "",
+  mobileNo: null,
+  phoneNo: "",
+  fax: "",
+  email: "",
+  contactPerson: "",
+  isActive: false,
+  hasDefaultRadiologist: true,
 }

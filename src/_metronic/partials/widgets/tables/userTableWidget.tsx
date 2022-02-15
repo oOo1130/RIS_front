@@ -102,6 +102,7 @@ const ProfileDetails: React.FC = () => {
                         type='text'
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder='User name'
+                        value={''}
                         {...formik.getFieldProps('loginName')}
                         />
                         {formik.touched.loginName && formik.errors.loginName && (
@@ -124,6 +125,7 @@ const ProfileDetails: React.FC = () => {
                         type='text'
                         className='form-control form-control-md form-control-solid mb-1 mb-lg-0'
                         placeholder='First name'
+                        value={''}
                         {...formik.getFieldProps('fullName')}
                         />
                         {formik.touched.fullName && formik.errors.fullName && (
@@ -150,6 +152,7 @@ const ProfileDetails: React.FC = () => {
                         type='password'
                         className='form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         id='Password'
+                        value={0}
                         {...formik.getFieldProps('password')}
                         />
                         {formik.touched.password && formik.errors.password && (
@@ -176,6 +179,7 @@ const ProfileDetails: React.FC = () => {
                         type='password'
                         className='form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         id='confirmemailpassword'
+                        value={''}
                         {...formik.getFieldProps('confirmPassword')}
                         />
                         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
@@ -198,6 +202,7 @@ const ProfileDetails: React.FC = () => {
                     type='tel'
                     className='form-control form-control-md form-control-solid'
                     placeholder='Phone number'
+                    value={''}
                     {...formik.getFieldProps('mobileNo')}
                     />
                     {formik.touched.mobileNo && formik.errors.mobileNo && (
@@ -218,13 +223,13 @@ const ProfileDetails: React.FC = () => {
                         className='form-select form-select-solid form-select-md fw-bold'
                         {...formik.getFieldProps('consultant')}
                         >
-                        <option value=''>Select a Consultant...</option>
-                        {consultants == null? (
-                            <option key={0} value=''></option>
-                        ):(
-                        consultants.map(consultant=>
-                        <option key={consultant.rcid} value={consultant.rcid}>{consultant.name}</option>
-                        ))}
+                            <option value=''>Select a Consultant...</option>
+                            {consultants == null? (
+                                <option key={0} value=''></option>
+                            ):(
+                            consultants.map((consultant, i)=>
+                            <option key={i} value={consultant.rcid}>{consultant.name}</option>
+                            ))}
                         </select>
                         {formik.touched.consultant && formik.errors.consultant && (
                         <div className='fv-plugins-message-container'>
@@ -248,8 +253,8 @@ const ProfileDetails: React.FC = () => {
                         {roles == null? (
                             <option key={0} value=''></option>
                         ):(
-                        roles.map(role=>
-                        <option key={role.roleID} value={role.roleID}>{role.name}</option>
+                        roles.map((role, i)=>
+                        <option key={i} value={role.roleID}>{role.name}</option>
                         ))}
                         </select>
                         {formik.touched.roleName && formik.errors.roleName && (
@@ -274,8 +279,8 @@ const ProfileDetails: React.FC = () => {
                     {hospitals == null? (
                             <option key={0} value=''></option>
                         ):(
-                        hospitals.map(hospital=>
-                        <option key={hospital.pid} value={hospital.pid}>{hospital.procName}</option>
+                        hospitals.map((hospital, i)=>
+                        <option key={i} value={hospital.pid}>{hospital.procName}</option>
                         ))}
                 </select>
                 {formik.touched.hospital && formik.errors.hospital && (
@@ -301,6 +306,7 @@ const ProfileDetails: React.FC = () => {
                         type='checkbox'
                         id='isAssignToRadAllow'
                         defaultChecked={data.isAssignToRadAllow}
+                        value={''}
                         onChange={() => {
                             updateData({isAssignToRadAllow: !data.isAssignToRadAllow})
                         }}
@@ -318,6 +324,7 @@ const ProfileDetails: React.FC = () => {
                             type='checkbox'
                             id='isReportViewAllow'
                             defaultChecked={data.isReportViewAllow}
+                            value={''}
                             onChange={() => {
                                 updateData({isReportViewAllow: !data.isReportViewAllow})
                             }}
@@ -337,6 +344,7 @@ const ProfileDetails: React.FC = () => {
                         className='form-check-input'
                         type='checkbox'
                         id='isReportWriteAllow'
+                        value={''}
                         defaultChecked={data.isReportWriteAllow}
                         onChange={() => {
                             updateData({isReportWriteAllow: !data.isReportWriteAllow})
@@ -356,6 +364,7 @@ const ProfileDetails: React.FC = () => {
                             type='checkbox'
                             id='isMainViewerAlloted'
                             defaultChecked={data.isMainViewerAlloted}
+                            value={''}
                             onChange={() => {
                                 updateData({isMainViewerAlloted: !data.isMainViewerAlloted})
                             }}
@@ -377,8 +386,9 @@ const ProfileDetails: React.FC = () => {
                         <input
                         type='text'
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
-                        placeholder=''
+                        placeholder=' '
                         {...formik.getFieldProps('cloudAccessLink')}
+                        value={''}
                         />
                         {formik.touched.cloudAccessLink && formik.errors.cloudAccessLink && (
                         <div className='fv-plugins-message-container'>
@@ -399,7 +409,7 @@ const ProfileDetails: React.FC = () => {
                         <input
                         type='text'
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
-                        placeholder=''
+                        placeholder=' '
                         {...formik.getFieldProps('cloudUserName')}
                         />
                         {formik.touched.cloudUserName && formik.errors.cloudUserName && (
@@ -421,7 +431,8 @@ const ProfileDetails: React.FC = () => {
                         <input
                         type='text'
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
-                        placeholder=''
+                        placeholder=' '
+                        value={''}
                         {...formik.getFieldProps('cloudPassword')}
                         />
                         {formik.touched.cloudPassword && formik.errors.cloudPassword && (
@@ -496,7 +507,7 @@ const UserTableWidget: React.FC<Props> = ({className}) => {
                                 <input
                                 className='form-check-input'
                                 type='checkbox'
-                                value='1'
+                                value=' '
                                 data-kt-check='true'
                                 data-kt-check-target='.widget-13-check'
                                 hidden
@@ -517,7 +528,7 @@ const UserTableWidget: React.FC<Props> = ({className}) => {
                         <tr>
                             <td>
                             <div className='form-check form-check-sm form-check-custom form-check-solid'>
-                                <input className='form-check-input widget-13-check' type='checkbox' value='1' />
+                                <input className='form-check-input widget-13-check' type='checkbox' value=' ' />
                             </div>
                             </td>
                             <td className='text-center'>
@@ -546,7 +557,7 @@ const UserTableWidget: React.FC<Props> = ({className}) => {
                         <tr key={user.userId}>
                             <td>
                             <div className='form-check form-check-sm form-check-custom form-check-solid'>
-                                <input className='form-check-input widget-13-check' type='checkbox' value='1' />
+                                <input className='form-check-input widget-13-check' type='checkbox' value='' />
                             </div>
                             </td>
                             <td className='text-center'>

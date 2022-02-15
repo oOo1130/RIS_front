@@ -3,10 +3,10 @@ import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {put, takeLatest} from 'redux-saga/effects'
 import {UserModel} from '../models/UserModel'
-import {getMenuItems, getReportConsultants, getRoles, getUserByToken} from './AuthCRUD'
+import {getMenuItems, getReportConsultants, getRoles, getTenants, getUserByToken} from './AuthCRUD'
 import {MenuItems} from '../models/MenuItems'
 //import { CreateUserModel } from '../models/CreateUserModel'
-import { IHospital, IReportConsultant, IRole, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
+import { IHospital, IReportConsultant, IRole, ITenant, IUserListDetails } from '../../accounts/components/settings/SettingsModel'
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T
@@ -23,7 +23,8 @@ export const actionTypes = {
   GetAllUsers: '[getAllUsers] Action',
   getReportConsultants: '[getReportConsultant] Action',
   getRoles: '[getRoles] Action',
-  getHospitals: '[getHospitals] Action'
+  getHospitals: '[getHospitals] Action',
+  getTenants: '[getTenants] Action'
 }
 
 const initialAuthState: IAuthState = {
@@ -33,7 +34,8 @@ const initialAuthState: IAuthState = {
   users: undefined,
   consultants: undefined,
   roles: undefined,
-  hospitals: undefined
+  hospitals: undefined,
+  tenants: undefined
 }
 
 export interface IAuthState {
@@ -44,6 +46,7 @@ export interface IAuthState {
   consultants?: IReportConsultant[]
   roles?: IRole[]
   hospitals?: IHospital[]
+  tenants?: ITenant[]
 }
 
 export const reducer = persistReducer(
@@ -103,6 +106,11 @@ export const reducer = persistReducer(
         return {...state, hospitals}
       }
 
+      case actionTypes.getTenants: {
+        const tenants = action.payload?.tenants
+        return {...state, tenants}
+      }
+
       default:
         return state
     }
@@ -125,7 +133,8 @@ export const actions = {
   getUsers: (users: IUserListDetails[]) => ({type: actionTypes.GetAllUsers, payload: {users}}),
   reportConsultants: (consultants: IReportConsultant[]) => ({type: actionTypes.getReportConsultants, payload: {consultants}}),
   getRoles: (roles: IRole[]) => ({type: actionTypes.getRoles, payload: {roles}}),
-  getHospitals: (hospitals: IHospital[]) => ({type: actionTypes.getHospitals, payload: {hospitals}})
+  getHospitals: (hospitals: IHospital[]) => ({type: actionTypes.getHospitals, payload: {hospitals}}),
+  getTenants: (tenants: ITenant[]) => ({type: actionTypes.getTenants, payload: {tenants}})
 }
 
 export function* saga() {
