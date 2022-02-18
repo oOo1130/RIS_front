@@ -22,13 +22,13 @@ export interface IUserListDetails {
   userId: number
   loginName: string
   fullName: string
-  password: string
-  confirmPassword: string
+  // password: string
+  // confirmPassword: string
   mobileNo?: number
-  consultant: string
+  // consultant: string
   roleId: number
   roleName: string
-  hospital: string
+  // hospital: string
   rCID: number
   tenantId: string
   status: string
@@ -123,7 +123,7 @@ export interface IReportConsultant {
 }
 
 export interface IRole {
-  isReportViewAllow: boolean;
+  isReportViewAllow: boolean
   roleID: number
   name: string
   description: string
@@ -148,6 +148,32 @@ export interface ITenant {
   hasDefaultRadiologist?: boolean
 }
 
+export interface IConsultant {
+  rcid: number
+  name: string
+  fsize1: number
+  identityLine1: string
+  fsize2: number
+  identityLine2: string
+  fsize3: number
+  identityLine3: string
+  fsize4: number
+  identityLine4: string
+  fsize5: number
+  identityLine5: string
+  fsize6: number
+  identityLine6: string
+  fsize7: number
+  eSignature: Uint8Array
+  isESignatureAllow: boolean
+  status: string
+  signatureBase64HtmlEmbeded: string
+  isViewerWithDefaultTemplate: boolean
+  radNextCloudID: string
+  dicomImagePath: string
+  groupName: string
+}
+
 export const profileDetailsInitValues: IProfileDetails = {
   avatar: '/media/avatars/150-2.jpg',
   fName: 'Max',
@@ -169,12 +195,12 @@ export const profileDetailsInitValues: IProfileDetails = {
 export const userListDetailsInitValues: IUserListDetails = {
   fullName: '',
   loginName: '',
-  password: '',
-  confirmPassword: '',
+  // password: '',
+  // confirmPassword: '',
   mobileNo: null,
-  consultant: '',
+  // consultant: '',
   roleName: '',
-  hospital: '',
+  // hospital: '',
   isAssignToRadAllow: false,
   isReportViewAllow: false,
   isReportWriteAllow: false,
@@ -256,4 +282,30 @@ export const tenantDetail : ITenant = {
   contactPerson: "",
   isActive: false,
   hasDefaultRadiologist: true,
+}
+
+export const consultantDetail : IConsultant = {
+  rcid: null,
+  name: "",
+  fsize1: null,
+  identityLine1: "",
+  fsize2: null,
+  identityLine2: "",
+  fsize3: null,
+  identityLine3: "",
+  fsize4: null,
+  identityLine4: "",
+  fsize5: null,
+  identityLine5: "",
+  fsize6: null,
+  identityLine6: "",
+  fsize7: null,
+  eSignature: null,
+  isESignatureAllow: false,
+  status: "",
+  signatureBase64HtmlEmbeded: "",
+  isViewerWithDefaultTemplate: false,
+  radNextCloudID: "",
+  dicomImagePath: "",
+  groupName: "",
 }

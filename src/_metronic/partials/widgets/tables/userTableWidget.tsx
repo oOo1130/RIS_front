@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import {IHospital, IReportConsultant, IRole, IUserListDetails, userListDetailsInitValues as initialValues} from '../../../../app/modules/accounts/components/settings/SettingsModel'
 import {useFormik} from 'formik'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { getAllUsers, getHospitals, getReportConsultants, getRoles } from '../../../../app/modules/auth/redux/AuthCRUD'
+import { getAllUsers, getHospitals, getReportConsultants, getRoles, createUser } from '../../../../app/modules/auth/redux/AuthCRUD'
 import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
 import { RootState } from '../../../../setup'
 
@@ -32,25 +32,27 @@ const ProfileDetails: React.FC = () => {
         initialValues,
         validationSchema: userListDetailsSchema,
         onSubmit: (values) => {
-        setLoading(true)
-        setTimeout(() => {
-            values.cloudAccessLink = data.cloudAccessLink
-            values.cloudPassword = data.cloudPassword
-            values.cloudUserName = data.cloudUserName
-            values.hospital = data.hospital
-            values.fullName = data.fullName
-            values.loginName = data.loginName
-            values.isAssignToRadAllow = data.isAssignToRadAllow
-            values.isMainViewerAlloted = data.isMainViewerAlloted
-            values.isReportViewAllow = data.isReportViewAllow
-            values.isReportWriteAllow = data.isReportWriteAllow
-            values.tenantId = data.tenantId
-            values.password = data.password
-            values.mobileNo = data.mobileNo
-            const updatedData = Object.assign(data, values)
-            setData(updatedData)
             setLoading(true)
-        }, 1000)
+            setTimeout(() => {
+                values.cloudAccessLink = data.cloudAccessLink
+                values.cloudPassword = data.cloudPassword
+                values.cloudUserName = data.cloudUserName
+                // values.hospital = data.hospital
+                values.fullName = data.fullName
+                values.loginName = data.loginName
+                values.isAssignToRadAllow = data.isAssignToRadAllow
+                values.isMainViewerAlloted = data.isMainViewerAlloted
+                values.isReportViewAllow = data.isReportViewAllow
+                values.isReportWriteAllow = data.isReportWriteAllow
+                values.tenantId = data.tenantId
+                // values.password = data.password
+                // values.confirmPassword = data.confirmPassword
+                values.mobileNo = data.mobileNo
+                // values.consultant = data.consultant
+                const updatedData = Object.assign(data, values)
+                setData(updatedData)
+                setLoading(true)
+            }, 1000)
         },
     })
 
@@ -73,9 +75,16 @@ const ProfileDetails: React.FC = () => {
             .then(tasks => {
                 dispatch(auth.actions.getHospitals(tasks))})  
         }
+
+        const saveAPIUser = async (values) => {
+            await createUser(values)
+            .then(res => setLoading(true))
+        }
+
         getAPIConsultant()
         getAPIRole()
         getAPIHospital()
+        saveAPIUser(data)
     }, [])
 
         const consultants: IReportConsultant[] = useSelector<RootState>(state => state.auth.consultants, shallowEqual) as IReportConsultant[]
@@ -153,13 +162,13 @@ const ProfileDetails: React.FC = () => {
                         className='form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         id='Password'
                         value={0}
-                        {...formik.getFieldProps('password')}
+                        // {...formik.getFieldProps('password')}
                         />
-                        {formik.touched.password && formik.errors.password && (
+                        {/* {formik.touched.password && formik.errors.password && (
                         <div className='fv-plugins-message-container'>
                             <div className='fv-help-block'>{formik.errors.password}</div>
                         </div>
-                        )}
+                        )} */}
                     </div>
                     </div>
                 </div>
@@ -180,13 +189,13 @@ const ProfileDetails: React.FC = () => {
                         className='form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         id='confirmemailpassword'
                         value={''}
-                        {...formik.getFieldProps('confirmPassword')}
+                        // {...formik.getFieldProps('confirmPassword')}
                         />
-                        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+                        {/* {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                         <div className='fv-plugins-message-container'>
                             <div className='fv-help-block'>{formik.errors.confirmPassword}</div>
                         </div>
-                        )}
+                        )} */}
                     </div>
                     </div>
                 </div>
@@ -231,11 +240,11 @@ const ProfileDetails: React.FC = () => {
                             <option key={i} value={consultant.rcid}>{consultant.name}</option>
                             ))}
                         </select>
-                        {formik.touched.consultant && formik.errors.consultant && (
+                        {/* {formik.touched.consultant && formik.errors.consultant && (
                         <div className='fv-plugins-message-container'>
                             <div className='fv-help-block'>{formik.errors.consultant}</div>
                         </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
                 
@@ -283,11 +292,11 @@ const ProfileDetails: React.FC = () => {
                         <option key={i} value={hospital.pid}>{hospital.procName}</option>
                         ))}
                 </select>
-                {formik.touched.hospital && formik.errors.hospital && (
+                {/* {formik.touched.hospital && formik.errors.hospital && (
                     <div className='fv-plugins-message-container'>
                     <div className='fv-help-block'>{formik.errors.hospital}</div>
                     </div>
-                )}
+                )} */}
                 </div>
                 </div>
 
@@ -594,7 +603,4 @@ const UserTableWidget: React.FC<Props> = ({className}) => {
 }
 
 export {UserTableWidget}
-function CreateUserModel() {
-    throw new Error('Function not implemented.')
-}
 

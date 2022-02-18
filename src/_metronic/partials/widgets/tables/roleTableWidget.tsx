@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react'
-import { Row } from 'react-bootstrap-v5'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { IRole } from '../../../../app/modules/accounts/components/settings/SettingsModel'
 import { getRoles } from '../../../../app/modules/auth/redux/AuthCRUD'
 import { RootState } from '../../../../setup'
 import * as auth from '../../../../app/modules/auth/redux/AuthRedux'
-import {KTSVG} from '../../../helpers'
 import { useFormik } from 'formik'
 
 type Props = {
@@ -51,7 +49,6 @@ const RoleTableWidget: React.FC<Props> = ({className}) => {
   }, [])
   
   const roles: IRole[] = useSelector<RootState>(state => state.auth.roles, shallowEqual) as IRole[]
-  console.log(roles)
 
   return (
     <div className={`card ${className}`}>
@@ -352,11 +349,8 @@ const RoleTableWidget: React.FC<Props> = ({className}) => {
             </div>
           </div>
           <div className='card-body py-3'>
-            {/* begin::Table container */}
             <div className='table-responsive'>
-              {/* begin::Table */}
               <table className='table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3'>
-                {/* begin::Table head */}
                 <thead>
                   <tr className='fw-bolder text-muted'>
                     <th className='w-25px'>
@@ -374,8 +368,6 @@ const RoleTableWidget: React.FC<Props> = ({className}) => {
                     <th className='min-w-140px'>Role Name</th>
                   </tr>
                 </thead>
-                {/* end::Table head */}
-                {/* begin::Table body */}
                 <tbody>
                   {roles == null? (
                     <tr>
@@ -417,11 +409,8 @@ const RoleTableWidget: React.FC<Props> = ({className}) => {
                       )
                   )}
                 </tbody>
-                {/* end::Table body */}
               </table>
-              {/* end::Table */}
             </div>
-            {/* end::Table container */}
           </div>
         </div>
       </div>
@@ -432,11 +421,4 @@ const RoleTableWidget: React.FC<Props> = ({className}) => {
 }
 
 export {RoleTableWidget}
-function CreateUserModel() {
-    throw new Error('Function not implemented.')
-}
-
-function lastIndexOf(roles: IRole[]) {
-  throw new Error('Function not implemented.')
-}
 

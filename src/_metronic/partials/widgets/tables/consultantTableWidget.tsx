@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 // import {KTSVG} from '../../../helpers'
 import * as Yup from 'yup'
-import {IHospital, IReportConsultant, IRole, ITenant, userListDetailsInitValues, IUserListDetails, tenantDetail  as initialValues} from '../../../../app/modules/accounts/components/settings/SettingsModel'
+import {IHospital, IReportConsultant, ITenant, tenantDetail, consultantDetail  as initialValues, IConsultant} from '../../../../app/modules/accounts/components/settings/SettingsModel'
 import {useFormik} from 'formik'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getAllUsers, getHospitals, getReportConsultants, getRoles, getTenants } from '../../../../app/modules/auth/redux/AuthCRUD'
@@ -20,23 +20,42 @@ const tenantListDetailsSchema = Yup.object().shape({
   })
   
 const ProfileDetails: React.FC = () => {
-    const [data, setData] = useState<ITenant>(initialValues)
-    const updateData = (fieldsToUpdate: Partial<ITenant>): void => {
+    const [data, setData] = useState<IConsultant>(initialValues)
+    const updateData = (fieldsToUpdate: Partial<IConsultant>): void => {
         const updatedData = Object.assign(data, fieldsToUpdate)
         setData(updatedData)
     }
 
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const formik = useFormik<ITenant>({
+    const formik = useFormik<IConsultant>({
         initialValues,
         validationSchema: tenantListDetailsSchema,
         onSubmit: (values) => {
         setLoading(true)
         setTimeout(() => {
-            values.tenantId = data.tenantId
+            values.rcid = data.rcid
+            values.radNextCloudID = data.radNextCloudID
+            values.eSignature = data.eSignature
             values.name = data.name
-            values.address = data.address
+            values.dicomImagePath = data.dicomImagePath
+            values.fsize1 = data.fsize1
+            values.fsize2 = data.fsize2
+            values.fsize3 = data.fsize3
+            values.fsize4 = data.fsize4
+            values.fsize5 = data.fsize5
+            values.fsize6 = data.fsize6
+            values.fsize7 = data.fsize7
+            values.groupName = data.groupName
+            values.status = data.status
+            values.identityLine1 = data.identityLine1
+            values.identityLine2 = data.identityLine2
+            values.identityLine3 = data.identityLine3
+            values.identityLine4 = data.identityLine4
+            values.identityLine5 = data.identityLine5
+            values.identityLine6 = data.identityLine6
+            values.signatureBase64HtmlEmbeded = data.signatureBase64HtmlEmbeded
+            values.isViewerWithDefaultTemplate = data.isViewerWithDefaultTemplate
             const updatedData = Object.assign(data, values)
             setData(updatedData)
             setLoading(true)
@@ -84,11 +103,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('name')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.name && formik.errors.name && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.name}</div>
                         </div>
                         )}
                     </div>
@@ -99,17 +118,17 @@ const ProfileDetails: React.FC = () => {
                   <label className='col-lg-6 text-center col-form-label  fw-bold fs-6'>Font Size</label>
                   <div className='col-lg-6'>
                     <div className='row'>
-                    <div className='col-lg-12 fv-row'>
+                      <div className='col-lg-12 fv-row'>
                         <input
                         type='text'
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize1')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize1 && formik.errors.fsize1 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize1}</div>
                         </div>
                         )}
                     </div>
@@ -130,11 +149,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine1')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine1 && formik.errors.identityLine1 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine1}</div>
                         </div>
                         )}
                     </div>
@@ -151,11 +170,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize2')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize2 && formik.errors.fsize2 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize2}</div>
                         </div>
                         )}
                     </div>
@@ -176,11 +195,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine2')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine2 && formik.errors.identityLine2 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine2}</div>
                         </div>
                         )}
                     </div>
@@ -199,9 +218,9 @@ const ProfileDetails: React.FC = () => {
                         value={''}
                         {...formik.getFieldProps('shortName')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize3 && formik.errors.fsize3 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize3}</div>
                         </div>
                         )}
                     </div>
@@ -222,11 +241,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine3')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine3 && formik.errors.identityLine3 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine3}</div>
                         </div>
                         )}
                     </div>
@@ -243,11 +262,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize4')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize4 && formik.errors.fsize4 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize4}</div>
                         </div>
                         )}
                     </div>
@@ -268,11 +287,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine4')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine4 && formik.errors.identityLine4 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine4}</div>
                         </div>
                         )}
                     </div>
@@ -289,11 +308,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize5')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize5 && formik.errors.fsize5 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize5}</div>
                         </div>
                         )}
                     </div>
@@ -314,11 +333,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine5')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine5 && formik.errors.identityLine5 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine5}</div>
                         </div>
                         )}
                     </div>
@@ -335,11 +354,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize6')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize6 && formik.errors.fsize6 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize6}</div>
                         </div>
                         )}
                     </div>
@@ -360,11 +379,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('identityLine6')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.identityLine6 && formik.errors.identityLine6 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.identityLine6}</div>
                         </div>
                         )}
                     </div>
@@ -381,11 +400,11 @@ const ProfileDetails: React.FC = () => {
                         className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                         placeholder=''
                         value={''}
-                        {...formik.getFieldProps('shortName')}
+                        {...formik.getFieldProps('fsize6')}
                         />
-                        {formik.touched.shortName && formik.errors.shortName && (
+                        {formik.touched.fsize6 && formik.errors.fsize6 && (
                         <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.shortName}</div>
+                            <div className='fv-help-block'>{formik.errors.fsize6}</div>
                         </div>
                         )}
                     </div>
@@ -434,10 +453,10 @@ const ProfileDetails: React.FC = () => {
                     className='form-check-input'
                     type='checkbox'
                     id='isAssignToRadAllow'
-                    defaultChecked={data.hasDefaultRadiologist}
+                    defaultChecked={data.isViewerWithDefaultTemplate}
                     value={''}
                     onChange={() => {
-                        updateData({hasDefaultRadiologist: !data.hasDefaultRadiologist})
+                        updateData({isViewerWithDefaultTemplate: !data.isViewerWithDefaultTemplate})
                     }}
                     />
                     </div>
@@ -455,11 +474,11 @@ const ProfileDetails: React.FC = () => {
                       className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                       placeholder=''
                       value={''}
-                      {...formik.getFieldProps('shortName')}
+                      {...formik.getFieldProps('dicomImagePath')}
                       />
-                      {formik.touched.shortName && formik.errors.shortName && (
+                      {formik.touched.dicomImagePath && formik.errors.dicomImagePath && (
                       <div className='fv-plugins-message-container'>
-                          <div className='fv-help-block'>{formik.errors.shortName}</div>
+                          <div className='fv-help-block'>{formik.errors.dicomImagePath}</div>
                       </div>
                       )}
                   </div>
@@ -479,11 +498,11 @@ const ProfileDetails: React.FC = () => {
                       className='col-lg-8 fv-row form-control form-control-md form-control-solid mb-3 mb-lg-0'
                       placeholder=''
                       value={''}
-                      {...formik.getFieldProps('shortName')}
+                      {...formik.getFieldProps('radNextCloudID')}
                       />
-                      {formik.touched.shortName && formik.errors.shortName && (
+                      {formik.touched.radNextCloudID && formik.errors.radNextCloudID && (
                       <div className='fv-plugins-message-container'>
-                          <div className='fv-help-block'>{formik.errors.shortName}</div>
+                          <div className='fv-help-block'>{formik.errors.radNextCloudID}</div>
                       </div>
                       )}
                   </div>
